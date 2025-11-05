@@ -29,11 +29,11 @@ class Enemy(Character):
         health - int
         strenght - int
         Speed - int
-        stat - str - must be valid stat
+        stat - str - must be valid stat - ["health","strength","speed","money"]
         statAmount - int
 
         '''
-        allowedStat = ["health","strength","speed"]
+        allowedStat = ["health","strength","speed","money"]
 
         super().__init__(name, Health, Strength, Speed)
 
@@ -82,7 +82,7 @@ class Enemy(Character):
         TypeError if stat is not str
         ValueError if stat is not a valid stat
         """
-        allowedStat = ["health","strength","speed"]
+        allowedStat = ["health","strength","speed","money"]
         if type(stat) is not str:
             raise TypeError("stat must be of type str")
         if stat not in allowedStat:

@@ -19,7 +19,8 @@ class Player(Character):
 
     player can pick up items unlike enemies
     '''
-
+    # https://stackoverflow.com/questions/36321344/how-to-set-default-value-for-variable had to look up how to set a default variable
+    # for an instance variable
     def __init__(self, name, Health, Strength, Speed,money = 0):
         '''
         cxtr for Player
@@ -31,17 +32,25 @@ class Player(Character):
         Strength - int
         Speed - int
         money - int - 0 by default
+        inventory - Inventory
 
         exceptions:
         TypeError if Health,Strengh,Speed,money arg is not int or if name is not str
         ValueError if Health,strength,speed,money is negative
         '''
-        super().__init__(name,Health, Strength, Speed,money)
+        super().__init__(name,Health, Strength, Speed)
+
+        if type(money) is not int:
+            raise TypeError("Money must be of type int")
+        if money < 0:
+            raise ValueError("Cannot have Negative money")
+
+        self._money = money
         
         self._inventory = Inventory() #extension and composition
 
     def __str__(self):
-        return 'Player | ' + super().__str__() + f' Inventory: {len(self._inventory._body)} items' #specialisation 
+        return 'Player | ' + super().__str__() + f' Money:{self.money} Inventory: {len(self._inventory._body)} items' #specialisation 
 
     
     @property
@@ -55,6 +64,35 @@ class Player(Character):
         returns inventory
         '''
         return self._inventory
+    
+    @property
+    def money(self):
+        '''
+        getter for money
+        returns money
+        '''
+        return self._money
+    
+    @money.setter
+    def money(self,money):
+        '''
+        Setter for money
+
+        params:
+        money - int
+
+        returns n/a
+
+        exceptions:
+        TypeError if money is not int
+        ValueError if money is negative
+        '''
+        if type(money) is not int:
+            raise TypeError("money must be of type int")
+        if money < 0:
+            raise ValueError("Cannot have Negative money")
+        
+        self._money = money
     
 
 
@@ -179,9 +217,35 @@ class Player(Character):
         
             elif stat == 'strength':
                 self.strength = self.strength + other.statAmount
+
+            elif stat == 'money':
+                self.money += other.statAmount
         
             else:
                 self.speed = self.speed + other.statAmount
+
+    
+    def sellItem(self):
+        '''
+        method to sell the item equipped in hand
+        removes item from player if they have one equipped
+        then adds the value of the item to their total money
+        if no item equipped - prints message
+
+        params n/a
+
+        returns n/a
+        '''
+
+        if self.equipped:
+            value = self.equipped.value
+            self.money += value
+            self.equipped = None
+            print(f'You gained {value} coins your total is now {self.money}')
+        
+        else:
+            print("Nothing in your hand to sell")
+        
             
 
 

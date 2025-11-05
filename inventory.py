@@ -52,13 +52,20 @@ class Inventory:
         i - int - index of item
 
         Returns:
-        n/a
+        item at index i
 
         Exceptions:
         IndexError if i is not in range of inventory size
+        TypeError if i is not an int
         '''
+        if type(i) is not int:
+            raise TypeError("i must be of type int")
+        
         if i < 0 or i >= len(self._body):
             raise IndexError('Index Not in Range')
+        
+        
+        
         return self._body[i]
     
     def add(self,item):
@@ -90,10 +97,13 @@ class Inventory:
         n/a
 
         Exceptions:
-        IndexError if i is not in range of inventory size       
+        IndexError if i is not in range of inventory size
+        TypeError if i is not an int
         '''
         if type(i) is not int:
             raise TypeError('must be of type int')
+        if i >= len(self._body) or i < 0:
+            raise IndexError("i must be a valid index")
         
         item = self._body.pop(i) # this is slow but for simplicity I didnt worry for runtimes
         self._weight -= item.weight

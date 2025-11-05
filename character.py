@@ -19,9 +19,8 @@ class Character:
     money - int - amount of money a character has - initialised to 0
 
     '''
-    # https://stackoverflow.com/questions/36321344/how-to-set-default-value-for-variable had to look up how to set a default variable
-    # for an instance variable
-    def __init__(self,name,Health,Strength,Speed,money = 0):
+    
+    def __init__(self,name,Health,Strength,Speed):
 
         '''
         cxtr for character
@@ -32,7 +31,7 @@ class Character:
         Strength - int
         Speed - int
         equipped - item or subclass of item - initiaised to None
-        money - int - initalised to 0 for every new instance
+        
 
         exceptions:
         TypeError if any arg is not int or if name is not str
@@ -56,17 +55,14 @@ class Character:
         if Speed < 0:
             raise ValueError('speed must be greater than 0')
         
-        if type(money) is not int:
-            raise TypeError("Money must be of type int")
-        if money < 0:
-            raise ValueError("Cannot have Negative money")
+        
         
         self._name = name
         self._health = Health
         self._strength = Strength
         self._speed = Speed
         self._equipped = None
-        self._money = money
+        
 
     
     def __str__(self):
@@ -198,34 +194,6 @@ class Character:
         
         self._equipped = item
 
-    @property
-    def money(self):
-        '''
-        getter for money
-        returns money
-        '''
-        return self._money
-    
-    @money.setter
-    def money(self,money):
-        '''
-        Setter for money
-
-        params:
-        money - int
-
-        returns n/a
-
-        exceptions:
-        TypeError if money is not int
-        ValueError if money is negative
-        '''
-        if type(money) is not int:
-            raise TypeError("money must be of type int")
-        if money < 0:
-            raise ValueError("Cannot have Negative money")
-        
-        self._money = money
 
     
     def takeDmg(self,damage):
@@ -298,7 +266,7 @@ class Character:
         args - None
         returns - damage that a character can deal based on which weapon and strength
         '''
-        if self._equipped is None or type(self._equipped) is Consumeable:
+        if self._equipped is None or type(self._equipped) is Consumeable or type(self.equipped) is Item:
             return self.strength
         
         

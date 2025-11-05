@@ -57,87 +57,89 @@ def TestCharacter():
     except ValueError as e:
         print(e)
     print()
-    print("MONEY")
     
-    try:
-        char = Character("hi",2,2,2,'h')
-    except TypeError as e:
-        print(e)
-    
-    try: 
-        char = Character('hi',2,2,2,-2)
-    except ValueError as e:
-        print(e)
     
     print()
     print('Testing getters and setters for each instance var')
     print()
     newChar = Character('Ben',20,40,60)
-    print(newChar.name)
+    print(f'name:{newChar.name}')
     newChar.name = 'Benjamin'
-    print(newChar.name)
+    print(f'name:{newChar.name}')
     try:
         newChar.name = 2
     except TypeError as e:
         print(e)
     
+    
     print()
-    print(newChar.health)
+    print(f'health:{newChar.health}')
     newChar.health = 100
-    print(newChar.health)
+    print(f'health:{newChar.health}')
     try:
         newChar.health = 'hi'
     except TypeError as e:
         print(e)
+
+    try:
+        newChar.health = -100
+    except ValueError as e:
+        print(e)
     
     print()
-    print(newChar.strength)
+    print(f'strength:{newChar.strength}')
     newChar.strength = 100
-    print(newChar.strength)
+    print(f'strength:{newChar.strength}')
     try:
         newChar.strength = 'hi'
     except TypeError as e:
         print(e)
+    
+    try:
+        newChar.strength = -1
+    except ValueError as e:
+        print(e)
 
     print()
-    print(newChar.speed)
+    print(f'speed: {newChar.speed}')
     newChar.speed = 100
-    print(newChar.speed)
+    print(f'speed: {newChar.speed}')
     try:
         newChar.speed = 'hi'
     except TypeError as e:
         print(e)
+    try:
+        newChar.speed = -1
+    except ValueError as e:
+        print(e)
     
 
-    print(newChar.equipped)
+    print(f'equipped: {newChar.equipped}')
     newChar.equipped = Weapon("iron sword",2,2,2)
-    print(newChar.equipped)
+    print(f'equipped: {newChar.equipped}')
     try:
         newChar.equipped = 2
     except TypeError as e:
         print(e)
 
-    print(newChar.money)
-    newChar.money = 5
-    print(newChar.money)
-    try:
-        newChar.money = '2'
-    except TypeError as e:
-        print(e)
-    try: 
-        newChar.money = -2
-    except ValueError as e:
-        print(e)
 
     print()
     print("TESTING METHODS")
     other = Character("EVIL BEN", 100,20,1)
+    other2 = Character('EVEN MORE EVIL BEN',100,2,1000000)
     run_test = newChar.run(other)
     if run_test:
         print("you successfully escaped")
     else:
         print("you cant escape")
+    run_test = newChar.run(other2)
+    if run_test:
+        print("you successfully escaped")
+    else:
+        print("you cant escape")
 
+
+    print()
     print("Testing Damage methods and isDead property")
     print(other)
     print(other.isDead)
@@ -154,11 +156,40 @@ def TestPlayer():
     print("TEST BLOCK FOR PLAYER CLASS")
     print()
 
-    player = Player("Ben",100,20,20)
+    player = Player("Ben",100,20,20) #money will be 0 by default
 
     '''
-    No need to check for errors in init all of it is handled in character init method
+    Just need to test money
     '''
+    print("MONEY INIT ERROR CHECKS")
+    
+    try:
+        player2 = Player("hi",2,2,2,'h')
+    except TypeError as e:
+        print(e)
+    
+    try: 
+        player2 = Player('hi',2,2,2,-2)
+    except ValueError as e:
+        print(e)
+
+    print()
+    print('testing getter and setter for money')
+    print(player.money)
+    player.money = 100
+    print(player.money)
+    try:
+        player.money = 'h'
+    except TypeError as e:
+        print(e)
+    
+    try:
+        player.money = -2
+    except ValueError as e:
+        print(e)
+
+
+    print()
     print('Testing str method')
     print(player)
 
@@ -204,6 +235,19 @@ def TestPlayer():
     player.hitCharacter(evilMonster)
     print(evilMonster.isDead)
     print(player) #monster is dead so health should be 120 now
+
+    print()
+    print("TESTING SELL ITEM METHOD")
+    player.pickUp(Weapon('expensive weapon',2,100,2))
+    print(player.inventory)
+    player.equipItem(1) #equips the expensive weapon
+    print(f'equipped: {player.equipped}')
+    print(f'money: {player.money}')
+    player.sellItem()
+    print(f'equipped: {player.equipped}')
+    print(f'money: {player.money}')
+
+    
 
 
 def TestEnemy():
@@ -269,7 +313,59 @@ def TestEnemy():
         print(e)
     
 
+def TestInventory():
+    inventory = Inventory()
+    print("TEST BLOCK FOR INVENTORY")
+    print()
+    #populating the inventory with some sample items
+    print("TESTING ADD METHOD")
+    print(inventory)
+    for i in range(10):
+        inventory.add(Item(f'SAMPLE{i}',1,10))
+    print(inventory)
+
+    try:
+        inventory.add(2)
+    except TypeError as e:
+        print(e)
+    
+    print()
+    print("TESTING GET METHOD")
+    item = inventory.get(0) #should get sample0
+    print(item)
+    try:
+        item = inventory.get(100)
+    except IndexError as e:
+        print(e)
+
+    try:
+        item = inventory.get('g')
+    except TypeError as e:
+        print(e)
+
+    print()
+    print("TESTING REMOVE METHOD")
+    print(inventory)
+    item = inventory.remove(0) #should remove and return SAMPLE0
+    print(f'item: {item}')
+    print(inventory)
+
+    try:
+        inventory.remove('g')
+    except TypeError as e:
+        print(e)
+
+    try:
+        inventory.remove(10000)
+    except IndexError as e:
+        print(e)
+
+
+
+
+
 
 # TestCharacter()
 # TestPlayer()
-TestEnemy()
+# TestEnemy()
+# TestInventory()

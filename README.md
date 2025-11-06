@@ -3,6 +3,7 @@ gaming and anything game related. I use encapsulation, Inheritance, composition,
 to gain such as weapons and consumeables.
 
 Encapsulation is seen in every class to protect the instance variables and they are only accessed through getter and setter properties
+all instance variable are are properties using the decorator method and also the standard method.
 
 My base classes are Character Item and Inventory all the rest of my classes Inherit from either Character or Item
 

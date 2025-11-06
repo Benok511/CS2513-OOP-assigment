@@ -72,7 +72,7 @@ class Weapon(Item):
         self._multiplier = multiplier
 
     
-    def upgradeWeapon(self,upgradeAmount):
+    def modifyWeapon(self,upgradeAmount):
         '''
         Method to upgrade a Weapon
 
@@ -83,12 +83,16 @@ class Weapon(Item):
 
         Exceptions:
         TypeError if upgradeAmount is not int
-        ValueError if upgradeAmount is 0 or less
+        ValueError if upgradeAmount is 0
         '''
         if type(upgradeAmount) is not int:
             raise TypeError('UpgradeAmount must be of type int')
-        if upgradeAmount <= 0:
-            raise ValueError("UpgradeAmount must be a positive number")
-        
+        if upgradeAmount == 0:
+            raise ValueError("UpgradeAmount must be a non-zero number")
+        if upgradeAmount < 0:
+            modification = 'downgraded' 
+        else:
+             modification = 'upgraded'
         self.multiplier += upgradeAmount
+        print(f'Your weapon was {modification} by {abs(upgradeAmount)}!')
 

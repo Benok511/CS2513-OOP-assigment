@@ -8,6 +8,9 @@ from inventory import Inventory
 
 
 def TestCharacter():
+    '''
+    Test method for character class
+    '''
     #testing the __init__ methods error checking
     print("TEST BLOCK FOR CHARACTER CLASS")
     print()
@@ -146,6 +149,10 @@ def TestCharacter():
     newChar.hitCharacter(other)
     print(other)
     print(other.isDead)
+    try:
+        newChar.hitCharacter(2)
+    except TypeError as e:
+        print(e)
 
     print(newChar.damage) #should be 2(strenght)
     newChar.equipped = None
@@ -153,6 +160,9 @@ def TestCharacter():
     
 
 def TestPlayer():
+    '''
+    Test method for player class
+    '''
     print("TEST BLOCK FOR PLAYER CLASS")
     print()
 
@@ -251,6 +261,9 @@ def TestPlayer():
 
 
 def TestEnemy():
+    '''
+    Test method for enemy class
+    '''
     print("TEST BLOCK FOR ENEMY CLASS")
     print()
 
@@ -314,6 +327,9 @@ def TestEnemy():
     
 
 def TestInventory():
+    '''
+    Test method for Inventory class
+    '''
     inventory = Inventory()
     print("TEST BLOCK FOR INVENTORY")
     print()
@@ -360,12 +376,226 @@ def TestInventory():
     except IndexError as e:
         print(e)
 
+def TestItem():
+    '''
+    Test method for Item class
+    '''
+    print("TEST BLOCK FOR ITEM")
+    print()
+
+    print("testing __init__ error checking")
+    print()
+    print("NAME")
+    try:
+        item = Item(2,2,2)
+    except TypeError as e:
+        print(e)
+    
+    print()
+    print("WEIGHT")
+    try:
+        item = Item('cool item','22',2)
+    except TypeError as e:
+        print(e)
+
+    try:
+        item = Item("aura item",-2,2)
+    except ValueError as e:
+        print(e)
+    
+    print()
+    print("VALUE")
+    try:
+        item = Item('tuff item',2,'2')
+    except TypeError as e:
+        print(e)
+    
+    try:
+        item = Item('wowowow',2,-100)
+    except ValueError as e:
+        print(e)
+
+    print()
+    print("TESTING GETTERS AND SETTERS FOR INSTANCE VARS AND STR METHOD")
+    item = Item("cool item",2,2)
+    print(item)
+
+    print()
+    print("NAME")
+    print(item.name)
+    item.name = 'cooler item'
+    print(item.name)
+    try:
+        item.name = 2
+    except TypeError as e:
+        print(e)
+
+    print()
+    print("WEIGHT")
+    print(item.weight)
+    item.weight = 100
+    print(item.weight)
+    try:
+        item.weight = 's'
+    except TypeError as e:
+        print(e)
+    
+    try:
+        item.weight = -200
+    except ValueError as e:
+        print(e)
+
+    print()
+    print("VALUE")
+    print(item.value)
+    item.value = 100
+    print(item.value)
+    try:
+        item.value = 'soup'
+    except TypeError as e:
+        print(e)
+    
+    try:
+        item.value = -10000000
+    except ValueError as e:
+        print(e)
+
+
+def TestWeapon():
+    '''
+    Test method for Weapon class
+    '''
+    print("TEST BLOCK FOR WEAPON")
+    print()
+    print('Testing __init__ error checking for multiplier')
+    print()
+    try:
+        weapon = Weapon("wham sword",2,2,'g')
+    except TypeError as e:
+        print(e)
+    
+    try:
+        weapon = Weapon("big sword",2,3,-50)
+    except ValueError as e:
+        print(e)
+
+    print()
+    print("testing getters and setter for multiplier")
+    weapon = Weapon("wham sword",2,2,2)
+    print(weapon)
+    print(weapon.multiplier)
+    weapon.multiplier = 55
+    print(weapon.multiplier)
+    try:
+        weapon.multiplier = 'g'
+    except TypeError as e:
+        print(e)
+
+    try:
+        weapon.multiplier = -100
+    except ValueError as e:
+        print(e) 
+    
+    print()
+    print("testing modify weapon method")
+    weapon.modifyWeapon(2)
+    weapon.modifyWeapon(-2)
+    try:
+        weapon.modifyWeapon('g')
+    except TypeError as e:
+        print(e)
+    
+    try:
+        weapon.modifyWeapon(-100000)
+    except ValueError as e:
+        print(e)
+
+def TestConsumeable():
+    '''
+    Test method for Consumeable class
+    '''
+    print('TEST BLOCK FOR CONSUMEABLE')
+    print()
+    print("testing __init__ error checks")
+    print()
+    print("STAT")
+    try:
+        healthPot = Consumeable('Health potion',2,2,2,2)
+    except TypeError as e:
+        print(e)
+
+    try:
+        healthPot = Consumeable('Health potion',2,2,'money',2) #money is not valid for consumables but is for enemy
+    except ValueError as e:
+        print(e)
+    print()
+
+    print("StatAmount")
+    try:
+        healthPot = Consumeable('Health potion',2,2,'health','h')
+    except TypeError as e:
+        print(e)
+
+    try:
+        healthPot = Consumeable('Health potion',2,2,'health',-200)
+    except ValueError as e:
+        print(e)
+    
+    print()
+    print("TESTING STR METHOD AND GETTERS AND SETTERS FOR STAT AND STATAMOUNT")
+    print()
+    print("STAT")
+    potion = Consumeable('potion',2,2,'health',2)
+    print(potion)
+    print(potion.stat)
+    potion.stat = 'strength'
+    print(potion.stat)
+
+    try:
+        potion.stat = 2
+    except TypeError as e:
+        print(e)
+    
+    try:
+        potion.stat = 'aura'
+
+    except ValueError as e:
+        print(e)
+
+    print()
+    print("STATAMOUNT")
+    print(potion.statAmount)
+    potion.statAmount = 100
+    print(potion.statAmount)
+    
+    try:
+        potion.statAmount = 'g'
+    except TypeError as e:
+        print(e)
+    
+    try:
+        potion.statAmount = -2
+    except ValueError as e:
+        print(e)
+
+    
+
+    
 
 
 
 
-
-# TestCharacter()
-# TestPlayer()
-# TestEnemy()
-# TestInventory()
+if __name__ == "__main__":
+    TestCharacter()
+    print('\n')
+    TestPlayer()
+    print('\n')
+    TestEnemy()
+    print('\n')
+    TestInventory()
+    print('\n')
+    TestItem()
+    print('\n')
+    TestWeapon()
+    print('\n') # adding for spacing so its more readable
+    TestConsumeable()

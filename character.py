@@ -16,8 +16,6 @@ class Character:
     Strength - Int - strength of character
     Speed - int - speed of character
     equipped - Item or subclass of Item - current equipped weapon - None describes no item equipped
-    money - int - amount of money a character has - initialised to 0
-
     '''
     
     def __init__(self,name,Health,Strength,Speed):
@@ -277,7 +275,4 @@ class Character:
             raise TypeError("other must be of type Character or a subclass of character")
         
         other.takeDmg(self.damage)
-        
 
-
-            

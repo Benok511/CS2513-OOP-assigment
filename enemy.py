@@ -40,7 +40,7 @@ class Enemy(Character):
         if type(stat) is not str:
             raise TypeError("stat must be of type str")
         if stat not in allowedStat:
-            raise ValueError("stat must be a valid attribute i.e health")
+            raise ValueError("stat must be a valid attribute i.e health,strenght,speed,money")
         
         if type(statAmount) is not int:
             raise TypeError("statAmount must be of type int")
@@ -86,7 +86,7 @@ class Enemy(Character):
         if type(stat) is not str:
             raise TypeError("stat must be of type str")
         if stat not in allowedStat:
-            raise ValueError("stat must be a valid attribute i.e health")
+            raise ValueError("stat must be a valid attribute i.e health,strenght,speed,money")
         
         self._stat = stat
 

@@ -27,7 +27,7 @@ class Consumeable(Item):
         name - str
         weight - str
         value - int
-        stat - str - must be a valid stat
+        stat - str - must be a valid stat - ["health","strength","speed"]
         statAmount - int
 
         returns n/a
@@ -43,7 +43,7 @@ class Consumeable(Item):
         if type(stat) is not str:
             raise TypeError("stat must be of type str")
         if stat not in allowedStat:
-            raise ValueError("stat must be a valid attribute i.e health")
+            raise ValueError("stat must be a valid attribute i.e health,strenght,speed")
         
         if type(statAmount) is not int:
             raise TypeError("statAmount must be of type int")
@@ -89,7 +89,7 @@ class Consumeable(Item):
         if type(stat) is not str:
             raise TypeError("stat must be of type str")
         if stat not in allowedStat:
-            raise ValueError("stat must be a valid attribute i.e health")
+            raise ValueError("stat must be a valid attribute i.e health,strenght,speed")
         
         self._stat = stat
 

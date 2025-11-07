@@ -261,6 +261,31 @@ def TestPlayer():
     print(f'equipped: {player.equipped}')
     print(f'money: {player.money}')
 
+    print()
+    print("testing buy stats")
+    print(player)
+    player.buyStats("health",20)
+
+    try:
+        player.buyStats(1,2)
+    except TypeError as e:
+        print(e)
+    
+    try:
+        player.buyStats('aura',2)
+    except ValueError as e:
+        print(e)
+
+    try:
+        player.buyStats('health','g')
+    except TypeError as e:
+        print(e)
+
+    try:
+        player.buyStats('health',-200)
+    except ValueError as e:
+        print(e)
+
     
 
 

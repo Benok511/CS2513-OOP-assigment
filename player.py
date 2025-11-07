@@ -247,6 +247,39 @@ class Player(Character):
             print("Nothing in your hand to sell")
         
             
+    def buyStats(self,stat,statAmount):
+        allowedStat = ["health","strength","speed"]
+
+        if type(stat) is not str:
+            raise TypeError("stat must be of type str")
+        if stat not in allowedStat:
+            raise ValueError("stat must be a valid attribute i.e health,strenght,speed")
+        
+        if type(statAmount) is not int:
+            raise TypeError("statAmount must be of type int")
+        if statAmount < 0:
+            raise ValueError("statAmount must be a positive number")
+        
+        if statAmount > self.money:
+            print('You do not have enough money to buy these stats')
+        
+        else:
+            self.money -= statAmount
+            
+            if stat == 'health':
+                self.health = self.health + statAmount
+        
+            elif stat == 'strength':
+                self.strength = self.strength + statAmount
+
+            elif stat == 'money':
+                self.money += statAmount
+        
+            else:
+                self.speed = self.speed + statAmount
+            
+            print(f'You bought {statAmount} {stat} your new total is {self.money}')
+
 
 
 

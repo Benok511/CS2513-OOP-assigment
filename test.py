@@ -130,6 +130,8 @@ def TestCharacter():
 
     print()
     print("TESTING METHODS")
+    print()
+    print("run method")
     other = Character("EVIL BEN", 100,20,1)
     other2 = Character('EVEN MORE EVIL BEN',100,2,1000000)
     run_test = newChar.run(other)

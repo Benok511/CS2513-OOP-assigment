@@ -2,6 +2,8 @@ This is my assignment for my programming module where I had to use object orient
 gaming and anything game related. I use encapsulation, Inheritance, composition, aggregation, properties to model my game where there are players and enemies fighting and lots of nice loot
 to gain such as weapons and consumeables.
 
+The game is very simple just players fighting enemies to get stronger and gain higher stats and cool items
+
 Encapsulation is seen in every class to protect the instance variables and they are only accessed through getter and setter properties
 all instance variable are are properties using the decorator method and also the standard method.
 
@@ -24,6 +26,27 @@ Item is the base class from which Weapon and Consumeable inherit from, items and
 Weapon extends this by having a multiplier which works in tandem with a characters strength to increase the characters damage output
 
 Consumeable extends this by having a stat and StatAmount so that when a player uses a consumeable it increases the stat listed int "stat" and increases it by statAmount.
+
+I decided against putting the use functionality in the item although it wouldve been good for specialisation, to me it just made
+more sense to put that functionality within character/player
+
+To summarise I used these OOP concepts in these places:
+
+Encapsulation:
+All instance variables with getters and setters
+
+Inheritance:
+Player,Enemy inheriting from Character
+Weapon,Consumeable inheriting from Item
+
+Extension - all subclasses extend with instance variable and some with extra functionality
+
+Specialisation - Player specialises hitCharacter by adding the reward functionality for killing an enemy
+all subclasses have specialised str methods
+
+Composition:
+Players are composed of Inventories
+Inventories are composed of Items
 
 
 hope you enjoy my project 😄
